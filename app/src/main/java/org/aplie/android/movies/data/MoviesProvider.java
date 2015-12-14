@@ -51,6 +51,7 @@ public class MoviesProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -79,29 +80,34 @@ public class MoviesProvider extends ContentProvider {
         Uri newUri = ContentUris.withAppendedId(MoviesContract.MoviesEntry.CONTENT_URI, regId);
         Log.d(LOG_CONTENT_PROVIDER," Registros insertados "+regId);
 
+        getContext().getContentResolver().notifyChange(uri, null);
         return newUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        int regId = 0;
+        int rowsDelete = 0;
         if(uriMatcher.match(uri) == MOVIES){
             SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-            regId = db.delete(MoviesContract.MoviesEntry.TABLE_NAME, selection, selectionArgs);
+            rowsDelete = db.delete(MoviesContract.MoviesEntry.TABLE_NAME, selection, selectionArgs);
         }
-        Log.d(LOG_CONTENT_PROVIDER," Registros borrados "+regId);
-        return regId;
+        Log.d(LOG_CONTENT_PROVIDER," Registros borrados "+rowsDelete);
+        if(rowsDelete !=0)
+            getContext().getContentResolver().notifyChange(uri, null);
+        return rowsDelete;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        int regId = 0;
+        int rowsUpdate = 0;
         if(uriMatcher.match(uri) == MOVIES){
             SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-            regId = db.update(MoviesContract.MoviesEntry.TABLE_NAME, values, selection, selectionArgs);
+            rowsUpdate = db.update(MoviesContract.MoviesEntry.TABLE_NAME, values, selection, selectionArgs);
         }
-        Log.d(LOG_CONTENT_PROVIDER," Registros actualizados "+regId);
-        return regId;
+        Log.d(LOG_CONTENT_PROVIDER," Registros actualizados "+rowsUpdate);
+        if(rowsUpdate !=0)
+            getContext().getContentResolver().notifyChange(uri, null);
+        return rowsUpdate;
     }
 
     @Override

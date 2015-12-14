@@ -61,7 +61,7 @@ public class TestDB extends AndroidTestCase{
     public void testMovieTable(){
         SQLiteDatabase db = new MoviesDbHelper(mContext).getWritableDatabase();
 
-        ContentValues testValues = TestUtilities.createStarWarMovieValues();
+        ContentValues testValues = TestUtilities.createStarWarsMovieValues();
 
         long movieId = db.insert(MoviesContract.MoviesEntry.TABLE_NAME, null, testValues);
 
@@ -71,7 +71,7 @@ public class TestDB extends AndroidTestCase{
         assertTrue("Error: No records returned from movie query", cursor.moveToFirst());
 
         TestUtilities.validateCurrentRecord("Error: Movie query validation failed", cursor, testValues);
-        assertFalse("Error: More than one recordd returned from movie query",cursor.moveToNext());
+        assertFalse("Error: More than one record returned from movie query",cursor.moveToNext());
         cursor.close();
         db.close();
     }

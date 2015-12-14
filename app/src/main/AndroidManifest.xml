@@ -20,6 +20,12 @@
         <activity android:name=".DetailActivity">
 
         </activity>
+
+        <provider
+        android:authorities="@string/content_authority"
+        android:name=".data.MoviesProvider"
+        android:exported="false"
+        android:syncable="true" />
     </application>
 
 </manifest>
