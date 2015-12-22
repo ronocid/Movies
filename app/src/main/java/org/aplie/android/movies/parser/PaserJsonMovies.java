@@ -8,9 +8,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Roberto on 14/12/2015.
- */
 public class PaserJsonMovies {
 
     public static final String JMK_RESULTS = "results";

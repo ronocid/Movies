@@ -18,6 +18,16 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
+    public Movie(int id, String title, String originaTitle, String posterPath, String overview, String backdropPath, double voteAverage) {
+        this.id = id;
+        this.title = title;
+        this.originaTitle = originaTitle;
+        this.posterPath = posterPath;
+        this.overview = overview;
+        this.backdropPath = backdropPath;
+        this.voteAverage = voteAverage;
+    }
+
     public long getId() {
         return id;
     }

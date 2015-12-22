@@ -3,6 +3,8 @@
     <string name="app_name">Movies</string>
     <string name="action_settings">Settings</string>
 
+    <string name="sync_account_type">movie.aplie.org</string>
+
     <string name="language_movie">en</string>
     <string name="language_image_movie">en</string>
 </resources>
